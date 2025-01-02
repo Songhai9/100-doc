@@ -10,7 +10,7 @@ APP_KEY = os.getenv("APP_KEY")
 SHEETY_AUTH = os.getenv("SHEETY_AUTH")
 
 HOST_DOMAIN = "https://trackapi.nutritionix.com"
-SHEETY_URL = "https://api.sheety.co/04a5eb911b970feca5324c0571f9209d/copyOfMyWorkouts/workouts"
+SHEETY_URL = os.getenv("SHEETY_URL")
 
 
 nutritionix_headers = {

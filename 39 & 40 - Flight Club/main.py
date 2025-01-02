@@ -11,7 +11,7 @@ flight_search = FlightSearch()
 
 for row in sheet_data:
     if row["iataCode"] == "":
-        row["iataCode"] = flight_search.getDestinationCode()
+        row["iataCode"] = flight_search.getDestinationCode(keyword=row["city"].upper())
 
 print("\n\n")
 

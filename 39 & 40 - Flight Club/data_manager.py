@@ -6,6 +6,9 @@ from dotenv import load_dotenv
 load_dotenv()
 
 SHEETY_ENDPOINT = os.getenv("SHEETY_ENDPOINT")
+sheety_headers = {
+    "Authorization": os.getenv("SHEETY_AUTH")
+}
 
 class DataManager:
     #This class is responsible for talking to the Google Sheet.
@@ -13,7 +16,7 @@ class DataManager:
         self.destinationData = {}
     
     def getDestinationData(self):
-        response = requests.get(url=SHEETY_ENDPOINT)
+        response = requests.get(url=SHEETY_ENDPOINT, headers=sheety_headers)
         data = response.json()
         self.destinationData = data["prices"]
         return self.destinationData
@@ -27,7 +30,8 @@ class DataManager:
             }
 
             response = requests.put(url=f"{SHEETY_ENDPOINT}/{row['id']}",
-                                    json=new_data)
+                                    json=new_data,
+                                    headers=sheety_headers)
             print(response.status_code, response.json())
             
 
