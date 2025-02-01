@@ -3,7 +3,5 @@ class Question:
         self.text = text
         self.answer = answer
     
-    def ask_question(self):
-        print()
 
         
