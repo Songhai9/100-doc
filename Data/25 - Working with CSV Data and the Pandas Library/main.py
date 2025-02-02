@@ -12,7 +12,7 @@ screen.addshape(img)
 jim = turtle.Turtle()
 jim.penup()
 jim.hideturtle()
-jim.speed('fastest')
+jim.speed("fastest")
 
 title = "Guess a State"
 
@@ -36,19 +36,17 @@ while game_is_on:
         jim.goto(coords)
         jim.write(answer_state)
         guessed_states.append(answer_state)
-    elif answer_state == 'Exit':
+    elif answer_state == "Exit":
         game_is_on = False
-        for state in data.state.to_list():
-            if state not in guessed_states:
-                to_learn_states.append(state)
+        to_learn_states = [
+            state for state in data.state.to_list() if (state not in guessed_states)
+        ]
     elif answer_state in guessed_states:
-        title = f'{score}/50 Already guessed'
+        title = f"{score}/50 Already guessed"
     else:
-        title = f'{score}/50 Wrong Answer'
+        title = f"{score}/50 Wrong Answer"
 
-dict = {index : state for index, state in enumerate(to_learn_states)}
 
 print(to_learn_states)
 to_learn_data = pandas.DataFrame(to_learn_states)
 to_learn_data.to_csv("states_to_learn.csv")
-
