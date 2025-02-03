@@ -28,28 +28,6 @@ def flip_card():
     right_btn.config(state="normal")
     wrong_btn.config(state="normal")
 
-# ---------------------------- CHANGING WORD ------------------------------- #
-def confirm_word():
-    update_known_words()
-    new_word = random.choice(french_words)
-    canvas.itemconfig(displayed_word, text=new_word)
-    canvas.itemconfig(card_image, image=front_pic)
-    canvas.itemconfig(language, text="French")
-    right_btn.config(state="disabled")
-    wrong_btn.config(state="disabled")
-    window.after(3000, flip_card)
-
-
-def switch_word():
-    new_word = random.choice(french_words)
-    canvas.itemconfig(displayed_word, text=new_word)
-    canvas.itemconfig(card_image, image=front_pic)
-    canvas.itemconfig(language, text="French")
-    right_btn.config(state="disabled")
-    wrong_btn.config(state="disabled")
-    window.after(3000, flip_card)
-
-
 # ---------------------------- SAVING DATA ------------------------------- #
 def update_known_words():
     index = english_words.index(canvas.itemcget(displayed_word, "text"))
@@ -60,7 +38,21 @@ def update_known_words():
                 file.write(f"{french_words[i]},{english_words[i]}\n")
     french_words.pop(index)
     english_words.pop(index)
+    
+# ---------------------------- CHANGING WORD ------------------------------- #
 
+def switch_word():
+    new_word = random.choice(french_words)
+    canvas.itemconfig(displayed_word, text=new_word)
+    canvas.itemconfig(card_image, image=front_pic)
+    canvas.itemconfig(language, text="French")
+    right_btn.config(state="disabled")
+    wrong_btn.config(state="disabled")
+    window.after(3000, flip_card)
+
+def confirm_word():
+    update_known_words()
+    switch_word()
 
 # ---------------------------- UI SETUP ------------------------------- #
 
