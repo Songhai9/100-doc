@@ -1,20 +1,34 @@
 # Password Manager
 
-This project is a simple desktop Password Manager built with Python and Tkinter. It allows users to generate secure passwords and save them along with website and email/username details to a file.
+A simple GUI-based password manager built with Python and Tkinter.
+
+## Overview
+
+This project allows you to generate, save, and search for passwords. It uses a graphical interface which makes managing your login details easy and efficient.
 
 ## Features
 
-- **Password Generator:** Creates random passwords with letters, symbols, and numbers.
-- **Save Functionality:** Stores website, email, and password details in a text file.
-- **Clipboard Integration:** Automatically copies the generated password to the clipboard.
+- **Password Generation:** Create strong, random passwords with a single click.
+- **Save Passwords:** Automatically save generated passwords along with your website and email data into a JSON file.
+- **Password Search:** Quickly retrieve the password for any saved website.
+- **Clipboard Support:** Automatically copy the generated password to your clipboard for easy pasting.
 
 ## How to Use
 
-1. **Run the application:** Execute `main.py` to start the GUI.
-2. **Generate a Password:** Click on the "Generate password" button to obtain a new secure password.
-3. **Enter Details:** Input the website and email/username. The generated password appears in the password field.
-4. **Save Information:** Click the "Add" button to save the details. A confirmation dialog will appear.
+1. **Clone the Repository:**  
+    Ensure you have Python installed on your system.
 
-## Note
+2. **Run the Application:**  
+    Execute `main.py` to launch the password manager interface.
 
-Make sure to maintain the security of your stored passwords by securing the `passwords.txt` file.
+3. **Generate a Password:**  
+    Click on the "Generate password" button to create a new random password. The password will be inserted into the field and copied to your clipboard.
+
+4. **Add a New Entry:**  
+    Enter the website and email details, then click the "Add" button to save the password.
+
+5. **Search for a Saved Password:**  
+    Enter the website name in the designated field and click "Search" to retrieve the saved password.
+
+
+Enjoy managing your passwords easily!
