@@ -1,39 +1,36 @@
-# Workout Tracking using Google Sheets
+# Workout Tracker
 
-This project allows you to track your workouts using the Nutritionix API and store the data in a Google Sheet using the Sheety API.
+This project tracks your workouts by accepting a text description of your exercises, fetching relevant workout data from the Nutritionix API, and then logging the details (date, time, exercise, duration, and calories) to a Google Sheet via Sheety.
 
-## Setup
+## Features
 
-1. Clone the repository:
-    ```sh
-    git clone <repository-url>
-    cd <repository-directory>
+- Parse a user's workout input.
+- Retrieve exercise details from the Nutritionix API.
+- Automate logging to a Google Sheet using the Sheety API.
+
+## Installation
+
+1. Clone the repository.
+2. Create a virtual environment and activate it.
+3. Install dependencies:
     ```
-
-2. Install the required packages:
-    ```sh
     pip install -r requirements.txt
     ```
 
-4. Create a `.env` file in the project directory and add your API keys:
-    ```env
-    APP_ID=<your_nutritionix_app_id>
-    APP_KEY=<your_nutritionix_app_key>
-    SHEETY_AUTH=<your_sheety_auth_token>
+## Setup
+
+1. **Environment Variables**: Create a `.env` file in the project root with your credentials:
+    ```
+    NUTRITIONIX_ID='your_nutritionix_app_id'
+    NUTRITIONIX_KEY='your_nutritionix_api_key'
+    SHEETY_BEARER='Bearer your_sheety_bearer_token'
     ```
 
 ## Usage
 
-1. Run the script:
-    ```sh
-    python main.py
-    ```
+Run the project by executing `main.py`:
+```
+python main.py
+```
+Follow the prompt to input a description of your workout. The program will then log the details to your Google Sheet.
 
-2. When prompted, enter the exercise you did today.
-
-3. The script will log the exercise data to your Google Sheet.
-
-## APIs Used
-
-- **Nutritionix API**: To get exercise data.
-- **Sheety API**: To log the exercise data into a Google Sheet.

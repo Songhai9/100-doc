@@ -1,48 +1,42 @@
+# IMPORTS
 import requests
-from datetime import datetime
 import os
+from datetime import datetime
 from dotenv import load_dotenv
 
+# ENVIRONMENT VARIABLES
 load_dotenv()
+nutrtionix_id = os.getenv("NUTRITIONIX_ID")
+nutritionix_key = os.getenv("NUTRITIONIX_KEY")
+sheety_bearer = os.getenv("SHEETY_BEARER")
 
-APP_ID = os.getenv("APP_ID")
-APP_KEY = os.getenv("APP_KEY")
-SHEETY_AUTH = os.getenv("SHEETY_AUTH")
+# PROMPT USER
+user_input = input("What have you done today ?")
 
-HOST_DOMAIN = "https://trackapi.nutritionix.com"
-SHEETY_URL = os.getenv("SHEETY_URL")
+# FETCHING DATA
+nutritionix_endpoint = "https://trackapi.nutritionix.com/v2/natural/exercise"
+nutritionix_headers = {"x-app-id": nutrtionix_id, "x-app-key": nutritionix_key}
+sheety_endpoint = (
+    "https://api.sheety.co/cdd34efccfd608d8cfb9e1956e188626/copieDeMyWorkouts/workouts"
+)
+authorization_header = {"Authorization": sheety_bearer}
+nutritionix_config = {"query": user_input}
+nutritionix_response = requests.post(
+    url=nutritionix_endpoint, headers=nutritionix_headers, json=nutritionix_config
+)
+nurtitionix_data = nutritionix_response.json()
 
 
-nutritionix_headers = {
-    "x-app-id": APP_ID,
-    "x-app-key": APP_KEY
-}
-
-sheety_headers ={
-    "Authorization": SHEETY_AUTH
-}
-
-exercise_endpoint = f"{HOST_DOMAIN}/v2/natural/exercise"
-
-exercise_query = input("What have you done today ?: ")
-
-exercise_params = {
-    "query": exercise_query
-}
-
-exercise_info = requests.post(url=exercise_endpoint, json=exercise_params, headers=nutritionix_headers)
-# print(exercise_info.text)
-
-today = datetime.now()
-
-row_info = {
+# UPLOADING TO SHEETY
+sheety_data = {
     "workout": {
-        "date": today.strftime("%d/%m/%y"),
-        "time": today.strftime("%H:%M:%S"),
-        "exercise": exercise_info.json()["exercises"][0]["user_input"],
-        "duration": exercise_info.json()["exercises"][0]["duration_min"],
-        "calories": exercise_info.json()["exercises"][0]["nf_calories"]
+        "date": datetime.now().strftime("%d/%m/%y"),
+        "time": datetime.now().strftime("%H:%M:%S"),
+        "exercise": nurtitionix_data["exercises"][0]["name"],
+        "duration": nurtitionix_data["exercises"][0]["duration_min"],
+        "calories": nurtitionix_data["exercises"][0]["nf_calories"],
     }
 }
-
-add_row = requests.post(url=SHEETY_URL, json=row_info, headers=sheety_headers)
+sheety_response = requests.post(
+    url=sheety_endpoint, json=sheety_data, headers=authorization_header
+)
